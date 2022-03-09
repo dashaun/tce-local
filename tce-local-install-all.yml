@@ -132,3 +132,43 @@ spec:
     versionSelection:
       constraints: ">=1.0.0"
   serviceAccountName: local-knative-default-sa
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: local-registry-default-sa
+  namespace: default
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: local-registry-role
+rules:
+  - apiGroups: ["*"]
+    resources: ["*"]
+    verbs: ["*"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: local-registry-role-binding
+subjects:
+  - kind: ServiceAccount
+    name: local-registry-default-sa
+    namespace: default
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: local-registry-role
+---
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageInstall
+metadata:
+  name: local-registry
+  namespace: default
+spec:
+  packageRef:
+    refName: registry.local.community.tanzu.vmware.com
+    versionSelection:
+      constraints: ">=1.0.0"
+  serviceAccountName: local-registry-default-sa

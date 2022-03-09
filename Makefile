@@ -2,10 +2,10 @@
 # SPDX-License-Identifier: Apache-2.0
 
 REQUIRED_BINARIES := imgpkg kbld ytt
-CORE_OCI_IMAGE := ghcr.io/alexandreroman/tce-local-core
-MONITORING_OCI_IMAGE := ghcr.io/alexandreroman/tce-local-monitoring
-KNATIVE_OCI_IMAGE := ghcr.io/alexandreroman/tce-local-knative
-REPO_OCI_IMAGE := ghcr.io/alexandreroman/tce-local
+CORE_OCI_IMAGE := ghcr.io/dashaun/tce-local-core
+MONITORING_OCI_IMAGE := ghcr.io/dashaun/tce-local-monitoring
+KNATIVE_OCI_IMAGE := ghcr.io/dashaun/tce-local-knative
+REPO_OCI_IMAGE := ghcr.io/dashaun/tce-local
 SOURCE_URL := $(shell git remote get-url origin)
 BUILD_DATE := $(shell date +"%Y-%m-%dT%TZ")
 
