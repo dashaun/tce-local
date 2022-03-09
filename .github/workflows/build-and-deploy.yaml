@@ -1,6 +1,7 @@
 name: Build and deploy package repository
 
 on:
+  workflow_dispatch:
   push:
     branches: [ main ]
 
