@@ -5,7 +5,6 @@ metadata:
 spec:
   packageRef:
     refName: grafana.community.tanzu.vmware.com
-    version: "7.5.7-1"
   serviceAccountName: local-monitoring-default-sa
   values:
   - secretRef:
