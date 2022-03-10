@@ -16,6 +16,7 @@ grafana:
         access: proxy
         isDefault: true
 ingress:
+  enabled: false
   virtual_host_fqdn: #@ "grafana.{}".format(data.values.local.domain)
 #@ end
 

@@ -2,3 +2,4 @@
 ---
 local:
   domain: 127.0.0.1.nip.io
+  repository: 127.0.0.1.nip.io/tce-local
