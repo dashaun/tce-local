@@ -1,0 +1,21 @@
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageInstall
+metadata:
+  name: fluent-bit
+spec:
+  packageRef:
+    refName: fluent-bit.community.tanzu.vmware.com
+    versionSelection:
+      constraints: ">=1.7.5"
+  serviceAccountName: local-monitoring-default-sa
+  values:
+  - secretRef:
+      name: fluent-bit-pkg-values
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: fluent-bit-pkg-values
+type: Opaque
+stringData:
+  values.yml:
