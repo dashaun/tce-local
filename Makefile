@@ -44,7 +44,7 @@ cluster-create:
 update-repo:
 	tanzu package repository update tkg-core-repository --url projects.registry.vmware.com/tce/main:0.10.1 -n tanzu-package-repo-global
 
-repo-add:
+repo-add: update-repo
 	tanzu package repository add tce-local --url $(REPO_OCI_IMAGE) -n tanzu-package-repo-global
 
 install-core:
@@ -56,5 +56,5 @@ install-monitoring:
 install-knative:
 	tanzu package install local-knative --package-name knative.local.community.tanzu.vmware.com --version 1.0.0
 
-install-registry: update-repo
+install-registry:
 	tanzu package install local-registry --package-name registry.local.community.tanzu.vmware.com --version 1.0.0

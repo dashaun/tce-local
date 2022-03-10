@@ -6,7 +6,7 @@ spec:
   packageRef:
     refName: knative-serving.community.tanzu.vmware.com
     versionSelection:
-      constraints: ">=0.22.0"
+      constraints: ">=1.0.0"
   serviceAccountName: local-knative-default-sa
   values:
   - secretRef:
