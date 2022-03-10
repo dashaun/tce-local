@@ -5,6 +5,9 @@ metadata:
 spec:
   packageRef:
     refName: prometheus.community.tanzu.vmware.com
+    versionSelection:
+      constraints: 2.27.0-1
+      prereleases: {}
   serviceAccountName: local-monitoring-default-sa
   values:
   - secretRef:
