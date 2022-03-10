@@ -6,7 +6,8 @@ spec:
   packageRef:
     refName: grafana.community.tanzu.vmware.com
     versionSelection:
-      constraints: "=7.5.7-1"
+      constraints: ">=7.5.7"
+      prereleases: {}
   serviceAccountName: local-monitoring-default-sa
   values:
   - secretRef:
