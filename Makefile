@@ -15,7 +15,7 @@ check-carvel:
 		$(if $(shell which $(exec)),,$(error "'$(exec)' not found. Carvel toolset is required. See instructions at https://carvel.dev/#install")))
 
 clean:
-	rm -rf repo pkg/core/.imgpkg pkg/monitoring/.imgpkg pkg/knative/.imgpkg
+	rm -rf repo pkg/core/.imgpkg pkg/monitoring/.imgpkg pkg/knative/.imgpkg pkg/registry/.imgpkg
 
 lock: check-carvel # Lock files.
 	vendir sync --chdir pkg/core
@@ -39,7 +39,7 @@ push: check-carvel # Build and push packages.
 	imgpkg push --bundle $(REPO_OCI_IMAGE) --file repo
 
 cluster-create:
-	tanzu unmanaged-cluster create tce-local -c calico -p 80:80 -p 443:443
+	tanzu unmanaged-cluster create tce-local -c calico -p 80:80 -p 443:443 && tanzu package repository update tkg-core-repository --url projects.registry.vmware.com/tce/main:0.10.0 -n tanzu-package-repo-global
 
 repo-add:
 	tanzu package repository add tce-local --url $(REPO_OCI_IMAGE) -n tanzu-package-repo-global
