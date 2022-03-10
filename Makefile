@@ -39,7 +39,10 @@ push: check-carvel # Build and push packages.
 	imgpkg push --bundle $(REPO_OCI_IMAGE) --file repo
 
 cluster-create:
-	tanzu unmanaged-cluster create tce-local -c calico -p 80:80 -p 443:443 && tanzu package repository update tkg-core-repository --url projects.registry.vmware.com/tce/main:0.10.0 -n tanzu-package-repo-global
+	tanzu unmanaged-cluster create tce-local -c calico -p 80:80 -p 443:443 && tanzu package repository update tkg-core-repository --url projects.registry.vmware.com/tce/main:0.10.1 -n tanzu-package-repo-global
+
+update-repo:
+	tanzu package repository update tkg-core-repository --url projects.registry.vmware.com/tce/main:0.10.1 -n tanzu-package-repo-global
 
 repo-add:
 	tanzu package repository add tce-local --url $(REPO_OCI_IMAGE) -n tanzu-package-repo-global
@@ -53,5 +56,5 @@ install-monitoring:
 install-knative:
 	tanzu package install local-knative --package-name knative.local.community.tanzu.vmware.com --version 1.0.0
 
-install-registry:
+install-registry: update-repo
 	tanzu package install local-registry --package-name registry.local.community.tanzu.vmware.com --version 1.0.0
