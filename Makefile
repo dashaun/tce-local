@@ -42,7 +42,7 @@ cluster-create:
 	tanzu unmanaged-cluster create tce-local -c calico -p 80:80 -p 443:443
 
 update-repo:
-	tanzu package repository update tkg-core-repository --url projects.registry.vmware.com/tce/main:0.10.1 -n tanzu-package-repo-global
+	tanzu package repository update tkg-core-repository --url projects.registry.vmware.com/tce/main:v0.10.3 -n tanzu-package-repo-global
 
 repo-add:
 	tanzu package repository add tce-local --url $(REPO_OCI_IMAGE) -n tanzu-package-repo-global

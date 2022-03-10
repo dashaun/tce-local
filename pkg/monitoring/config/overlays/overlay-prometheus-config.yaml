@@ -4,7 +4,7 @@
 
 #@ def config():
 ingress:
-  enabled: false
+  enabled: true
   virtual_host_fqdn: #@ "prometheus.{}".format(data.values.local.domain)
   prometheus_prefix: "/"
   alertmanager_prefix: "/alertmanager/"
