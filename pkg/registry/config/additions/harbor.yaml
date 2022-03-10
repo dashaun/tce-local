@@ -6,8 +6,8 @@ spec:
   packageRef:
     refName: harbor.community.tanzu.vmware.com
     versionSelection:
-      constraints: ">=1.18.1"
-  serviceAccountName: local-core-default-sa
+      constraints: ">=2.2.3"
+  serviceAccountName: local-registry-default-sa
   values:
     - secretRef:
         name: harbor-pkg-values

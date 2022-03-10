@@ -12,7 +12,7 @@ spec:
     spec:
       fetch:
       - imgpkgBundle:
-          image: #@ data.values.pkg.monitoring
+          image: #@ data.values.pkg.registry
       template:
       - ytt:
           paths:
