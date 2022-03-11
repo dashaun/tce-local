@@ -7,7 +7,7 @@ spec:
     refName: kpack.community.tanzu.vmware.com
     versionSelection:
       constraints: ">=0.5.0"
-  serviceAccountName: local-registry-default-sa
+  serviceAccountName: local-paved-default-sa
   values:
     - secretRef:
         name: kpack-pkg-values

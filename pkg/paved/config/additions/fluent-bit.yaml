@@ -7,7 +7,7 @@ spec:
     refName: fluent-bit.community.tanzu.vmware.com
     versionSelection:
       constraints: ">=1.7.5"
-  serviceAccountName: local-monitoring-default-sa
+  serviceAccountName: local-paved-default-sa
   values:
   - secretRef:
       name: fluent-bit-pkg-values

@@ -8,7 +8,7 @@ spec:
     versionSelection:
       constraints: 2.27.0-1
       prereleases: {}
-  serviceAccountName: local-monitoring-default-sa
+  serviceAccountName: local-paved-default-sa
   values:
   - secretRef:
       name: prometheus-pkg-values

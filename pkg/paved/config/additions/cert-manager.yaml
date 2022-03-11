@@ -7,4 +7,4 @@ spec:
     refName: cert-manager.community.tanzu.vmware.com
     versionSelection:
       constraints: ">=1.6.1"
-  serviceAccountName: local-core-default-sa
+  serviceAccountName: local-paved-default-sa

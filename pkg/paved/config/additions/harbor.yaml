@@ -7,7 +7,7 @@ spec:
     refName: harbor.community.tanzu.vmware.com
     versionSelection:
       constraints: ">=2.2.3"
-  serviceAccountName: local-registry-default-sa
+  serviceAccountName: local-paved-default-sa
   values:
     - secretRef:
         name: harbor-pkg-values
