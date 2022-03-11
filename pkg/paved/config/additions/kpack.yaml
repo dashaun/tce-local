@@ -1,0 +1,21 @@
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageInstall
+metadata:
+  name: kpack
+spec:
+  packageRef:
+    refName: kpack.community.tanzu.vmware.com
+    versionSelection:
+      constraints: ">=0.5.0"
+  serviceAccountName: local-registry-default-sa
+  values:
+    - secretRef:
+        name: kpack-pkg-values
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: kpack-pkg-values
+type: Opaque
+stringData:
+  values.yml:

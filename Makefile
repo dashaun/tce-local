@@ -6,6 +6,7 @@ CORE_OCI_IMAGE := ghcr.io/dashaun/tce-local-core
 MONITORING_OCI_IMAGE := ghcr.io/dashaun/tce-local-monitoring
 KNATIVE_OCI_IMAGE := ghcr.io/dashaun/tce-local-knative
 REGISTRY_OCI_IMAGE := ghcr.io/dashaun/tce-local-registry
+PAVED_OCI_IMAGE := ghcr.io/dashaun/tce-local-paved
 REPO_OCI_IMAGE := ghcr.io/dashaun/tce-local
 SOURCE_URL := $(shell git remote get-url origin)
 BUILD_DATE := $(shell date +"%Y-%m-%dT%TZ")
@@ -15,7 +16,7 @@ check-carvel:
 		$(if $(shell which $(exec)),,$(error "'$(exec)' not found. Carvel toolset is required. See instructions at https://carvel.dev/#install")))
 
 clean:
-	rm -rf repo pkg/core/.imgpkg pkg/monitoring/.imgpkg pkg/knative/.imgpkg pkg/registry/.imgpkg
+	rm -rf repo pkg/core/.imgpkg pkg/monitoring/.imgpkg pkg/knative/.imgpkg pkg/registry/.imgpkg pkg/paved/.imgpkg
 
 lock: check-carvel # Lock files.
 	vendir sync --chdir pkg/core
@@ -25,15 +26,18 @@ push: check-carvel # Build and push packages.
 	rm -rf pkg/monitoring/.imgpkg && mkdir pkg/monitoring/.imgpkg && kbld -f pkg/monitoring/config --imgpkg-lock-output pkg/monitoring/.imgpkg/images.yml && \
 	rm -rf pkg/knative/.imgpkg && mkdir pkg/knative/.imgpkg && kbld -f pkg/knative/config --imgpkg-lock-output pkg/knative/.imgpkg/images.yml && \
 	rm -rf pkg/registry/.imgpkg && mkdir pkg/registry/.imgpkg && kbld -f pkg/registry/config --imgpkg-lock-output pkg/registry/.imgpkg/images.yml && \
+	rm -rf pkg/paved/.imgpkg && mkdir pkg/paved/.imgpkg && kbld -f pkg/paved/config --imgpkg-lock-output pkg/paved/.imgpkg/images.yml && \
 	mkdir -p repo/packages && \
 	ytt -f pkg/core/metadata.yaml -f pkg/core/package.yaml -v pkg.core=$(CORE_OCI_IMAGE) -v source.url=$(SOURCE_URL) -v build.date=$(BUILD_DATE) > repo/packages/core.yaml && \
 	ytt -f pkg/monitoring/metadata.yaml -f pkg/monitoring/package.yaml -v pkg.monitoring=$(MONITORING_OCI_IMAGE) -v source.url=$(SOURCE_URL) -v build.date=$(BUILD_DATE) > repo/packages/monitoring.yaml && \
 	ytt -f pkg/knative/metadata.yaml -f pkg/knative/package.yaml -v pkg.knative=$(KNATIVE_OCI_IMAGE) -v source.url=$(SOURCE_URL) -v build.date=$(BUILD_DATE) > repo/packages/knative.yaml && \
 	ytt -f pkg/registry/metadata.yaml -f pkg/registry/package.yaml -v pkg.registry=$(REGISTRY_OCI_IMAGE) -v source.url=$(SOURCE_URL) -v build.date=$(BUILD_DATE) > repo/packages/registry.yaml && \
+    ytt -f pkg/paved/metadata.yml -f pkg/paved/package.yaml -v pkg.registry=$(REGISTRY_OCI_IMAGE) -v source.url=$(SOURCE_URL) -v build.date=$(BUILD_DATE) > repo/packages/paved.yaml && \
 	imgpkg push --bundle $(CORE_OCI_IMAGE) --file pkg/core && \
 	imgpkg push --bundle $(MONITORING_OCI_IMAGE) --file pkg/monitoring && \
 	imgpkg push --bundle $(KNATIVE_OCI_IMAGE) --file pkg/knative && \
 	imgpkg push --bundle $(REGISTRY_OCI_IMAGE) --file pkg/registry && \
+	imgpkg push --bundle $(PAVED_OCI_IMAGE) --file pkg/paved && \
 	rm -rf repo/.imgpkg && mkdir -p repo/.imgpkg && \
 	kbld -f repo/packages --imgpkg-lock-output repo/.imgpkg/images.yml && \
 	imgpkg push --bundle $(REPO_OCI_IMAGE) --file repo
