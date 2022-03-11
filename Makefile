@@ -32,7 +32,7 @@ push: check-carvel # Build and push packages.
 	ytt -f pkg/monitoring/metadata.yaml -f pkg/monitoring/package.yaml -v pkg.monitoring=$(MONITORING_OCI_IMAGE) -v source.url=$(SOURCE_URL) -v build.date=$(BUILD_DATE) > repo/packages/monitoring.yaml && \
 	ytt -f pkg/knative/metadata.yaml -f pkg/knative/package.yaml -v pkg.knative=$(KNATIVE_OCI_IMAGE) -v source.url=$(SOURCE_URL) -v build.date=$(BUILD_DATE) > repo/packages/knative.yaml && \
 	ytt -f pkg/registry/metadata.yaml -f pkg/registry/package.yaml -v pkg.registry=$(REGISTRY_OCI_IMAGE) -v source.url=$(SOURCE_URL) -v build.date=$(BUILD_DATE) > repo/packages/registry.yaml && \
-    ytt -f pkg/paved/metadata.yml -f pkg/paved/package.yaml -v pkg.registry=$(REGISTRY_OCI_IMAGE) -v source.url=$(SOURCE_URL) -v build.date=$(BUILD_DATE) > repo/packages/paved.yaml && \
+    ytt -f pkg/paved/metadata.yaml -f pkg/paved/package.yaml -v pkg.paved=$(PAVED_OCI_IMAGE) -v source.url=$(SOURCE_URL) -v build.date=$(BUILD_DATE) > repo/packages/paved.yaml && \
 	imgpkg push --bundle $(CORE_OCI_IMAGE) --file pkg/core && \
 	imgpkg push --bundle $(MONITORING_OCI_IMAGE) --file pkg/monitoring && \
 	imgpkg push --bundle $(KNATIVE_OCI_IMAGE) --file pkg/knative && \
@@ -62,3 +62,6 @@ install-knative:
 
 install-registry:
 	tanzu package install local-registry --package-name registry.local.community.tanzu.vmware.com --version 1.0.0
+
+install-paved:
+	tanzu package install local-paved --package-name paved.local.community.tanzu.vmware.com --version 1.0.0

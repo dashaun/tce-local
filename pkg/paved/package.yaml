@@ -12,7 +12,7 @@ spec:
     spec:
       fetch:
       - imgpkgBundle:
-          image: #@ data.values.pkg.core
+          image: #@ data.values.pkg.paved
       template:
       - ytt:
           paths:
