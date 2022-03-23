@@ -1,5 +1,22 @@
 # Running Tanzu Community Edition on your local workstation
 
+### Quick Start (DaShaun's version)
+
+This is not supported at all!!!!  For learning purposes only.....
+
+- Install Tanzu CLI
+
+```bash
+tanzu unmanaged-cluster create tce-local -c calico -p 80:80 -p 443:443
+tanzu package repository add tce-local --url ghcr.io/dashaun/tce-local -n tanzu-package-repo-global
+tanzu package repository update tkg-core-repository --url projects.registry.vmware.com/tce/main:v0.10.3 -n tanzu-package-repo-global
+tanzu package install local-paved --package-name paved.local.community.tanzu.vmware.com --version 1.0.0
+```
+
+```
+tanzu uc create --tkr dev.registry.tanzu.vmware.com/tap-gui/mstergianis-tkr:v1.21.5-kapp ap-tce -c calico -p 80:80 -p 443:443
+```
+
 This projects describes how to run [Tanzu Community Edition](https://tanzucommunityedition.io/) (TCE),
 a free Kubernetes distribution leveraging open source technology, on your local workstation.
 
