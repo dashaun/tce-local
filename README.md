@@ -13,10 +13,6 @@ tanzu package repository update tkg-core-repository --url projects.registry.vmwa
 tanzu package install local-paved --package-name paved.local.community.tanzu.vmware.com --version 1.0.0
 ```
 
-```
-tanzu uc create --tkr dev.registry.tanzu.vmware.com/tap-gui/mstergianis-tkr:v1.21.5-kapp ap-tce -c calico -p 80:80 -p 443:443
-```
-
 This projects describes how to run [Tanzu Community Edition](https://tanzucommunityedition.io/) (TCE),
 a free Kubernetes distribution leveraging open source technology, on your local workstation.
 
