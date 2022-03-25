@@ -1,0 +1,14 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: PackageMetadata
+metadata:
+  name: bootiful.local.community.tanzu.vmware.com
+spec:
+  displayName: local-bootiful
+  longDescription: Bootiful baseline
+  shortDescription: Bootiful baseline
+  providerName: TCE Local
+  maintainers:
+  - name: DaShaun Carter
+  supportDescription: #@ "Go to {} for documentation".format(data.values.source.url)

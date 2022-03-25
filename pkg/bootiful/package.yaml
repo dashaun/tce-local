@@ -1,0 +1,25 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: Package
+metadata:
+  name: bootiful.local.community.tanzu.vmware.com.1.0.0
+spec:
+  refName: bootiful.local.community.tanzu.vmware.com
+  version: 1.0.0
+  releasedAt: #@ data.values.build.date
+  template:
+    spec:
+      fetch:
+      - imgpkgBundle:
+          image: #@ data.values.pkg.paved
+      template:
+      - ytt:
+          paths:
+          - config/
+      - kbld:
+          paths:
+          - '-'
+          - .imgpkg/images.yml
+      deploy:
+      - kapp: {}

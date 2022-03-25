@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 REQUIRED_BINARIES := imgpkg kbld ytt
+BOOTIFUL_OCI_IMAGE = ghcr.io/dashaun/tce-local-bootiful
 PAVED_OCI_IMAGE := ghcr.io/dashaun/tce-local-paved
 REPO_OCI_IMAGE := ghcr.io/dashaun/tce-local
 SOURCE_URL := $(shell git remote get-url origin)
@@ -18,9 +19,12 @@ lock: check-carvel # Lock files.
 	vendir sync --chdir pkg/core
 
 push: check-carvel # Build and push packages.
+	rm -rf pkg/bootiful/.imgpkg && mkdir pkg/bootiful/.imgpkg && kbld -f pkg/bootiful/config --imgpkg-lock-output pkg/bootiful/.imgpkg/images.yml && \
 	rm -rf pkg/paved/.imgpkg && mkdir pkg/paved/.imgpkg && kbld -f pkg/paved/config --imgpkg-lock-output pkg/paved/.imgpkg/images.yml && \
 	mkdir -p repo/packages && \
+    ytt -f pkg/bootiful/metadata.yaml -f pkg/bootiful/package.yaml -v pkg.bootiful=$(BOOTIFUL_OCI_IMAGE) -v source.url=$(SOURCE_URL) -v build.date=$(BUILD_DATE) > repo/packages/bootiful.yaml && \
     ytt -f pkg/paved/metadata.yaml -f pkg/paved/package.yaml -v pkg.paved=$(PAVED_OCI_IMAGE) -v source.url=$(SOURCE_URL) -v build.date=$(BUILD_DATE) > repo/packages/paved.yaml && \
+	imgpkg push --bundle $(BOOTIFUL_OCI_IMAGE) --file pkg/bootiful && \
 	imgpkg push --bundle $(PAVED_OCI_IMAGE) --file pkg/paved && \
 	rm -rf repo/.imgpkg && mkdir -p repo/.imgpkg && \
 	kbld -f repo/packages --imgpkg-lock-output repo/.imgpkg/images.yml && \
