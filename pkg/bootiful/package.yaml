@@ -8,6 +8,20 @@ spec:
   refName: bootiful.local.community.tanzu.vmware.com
   version: 1.0.0
   releasedAt: #@ data.values.build.date
+  valuesSchema:
+    openAPIv3:
+      title: Values schema
+      examples:
+        - local.domain: 127.0.0.1.nip.io
+      properties:
+        local.domain:
+          type: string
+          description: Base domain for cluster
+          default: 127.0.0.1.nip.io
+          examples:
+            - nuc.dashaun.org
+            - mbp.dashaun.dev
+            - tce.dashaun.io
   template:
     spec:
       fetch:

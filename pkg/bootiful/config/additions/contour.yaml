@@ -6,7 +6,7 @@ spec:
   packageRef:
     refName: contour.community.tanzu.vmware.com
     versionSelection:
-      constraints: ">=1.19.1"
+      constraints: ">=1.20.1"
   serviceAccountName: local-bootiful-default-sa
   values:
   - secretRef:

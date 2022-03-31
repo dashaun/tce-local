@@ -3,6 +3,8 @@
 
 REQUIRED_BINARIES := imgpkg kbld ytt
 BOOTIFUL_OCI_IMAGE = ghcr.io/dashaun/tce-local-bootiful
+MBP_OCI_IMAGE = ghcr.io/dashaun/tce-local-mbp
+NUC_OCI_IMAGE = ghcr.io/dashaun/tce-local-nuc
 PAVED_OCI_IMAGE := ghcr.io/dashaun/tce-local-paved
 REPO_OCI_IMAGE := ghcr.io/dashaun/tce-local
 SOURCE_URL := $(shell git remote get-url origin)

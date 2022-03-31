@@ -7,10 +7,10 @@ This is not supported at all!!!!  For learning purposes only.....
 - Install Tanzu CLI
 
 ```bash
-tanzu unmanaged-cluster create tce-local -c calico -p 80:80 -p 443:443
+tanzu unmanaged-cluster create bootiful-local -c calico -p 80:80 -p 443:443
 tanzu package repository add tce-local --url ghcr.io/dashaun/tce-local -n tanzu-package-repo-global
 tanzu package repository update tkg-core-repository --url projects.registry.vmware.com/tce/main:v0.10.3 -n tanzu-package-repo-global
-tanzu package install local-paved --package-name paved.local.community.tanzu.vmware.com --version 1.0.0
+tanzu package install local-bootiful --package-name bootiful.local.community.tanzu.vmware.com --version 1.0.0
 ```
 
 ## Deploying apps to your local Kubernetes cluster
